@@ -1,5 +1,8 @@
 package systementor.pensionatapp.pensionat.customer.service;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Service;
 import systementor.pensionatapp.pensionat.booking.repository.BookingRepository;
 import systementor.pensionatapp.pensionat.customer.model.CreateCustomerRequest;
