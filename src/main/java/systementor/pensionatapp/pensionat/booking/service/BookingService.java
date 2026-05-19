@@ -49,7 +49,6 @@ public class BookingService {
                 .orElseThrow(() -> new NotFoundException("Kunden finns inte"));
 
 
-        System.out.println("THIS IS THE ROOM ID" + request.roomId());
         Room room = roomRepository.findById(request.roomId())
                 .orElseThrow(() -> new NotFoundException("Rummet finns inte"));
 
@@ -61,7 +60,7 @@ public class BookingService {
 
 
     private void validateRoomIsAvailable(Long roomId, LocalDate startDate, LocalDate endDate, Long bookingIdToIgnore) {
-        List<Booking> bookings = bookingRepository.findByRoomAndStatus(roomId, BookingStatus.ACTIVE);
+        List<Booking> bookings = bookingRepository.findByRoomIdAndStatus(roomId, BookingStatus.ACTIVE);
         for (Booking existingBooking: bookings) {
             if(bookingIdToIgnore != null && bookingIdToIgnore.equals(existingBooking.getId()))  {
                 continue;
