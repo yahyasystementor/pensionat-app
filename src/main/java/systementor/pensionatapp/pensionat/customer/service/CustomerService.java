@@ -23,8 +23,14 @@ public class CustomerService {
         return customerRepository.findAll();
     }
 
+
+
+
     public Customer createCustomer(CreateCustomerRequest request) {
         Customer customer = new Customer(request.firstName(), request.lastName(), request.email(), request.phone());
         return customerRepository.save(customer);
     }
+
+
+
 }
