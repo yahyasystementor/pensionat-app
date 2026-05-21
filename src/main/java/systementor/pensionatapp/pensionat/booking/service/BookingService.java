@@ -2,6 +2,7 @@ package systementor.pensionatapp.pensionat.booking.service;
 
 
 import jakarta.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 import systementor.pensionatapp.pensionat.booking.BookingStatus;
 import systementor.pensionatapp.pensionat.booking.model.Booking;
@@ -14,8 +15,10 @@ import systementor.pensionatapp.pensionat.error.NotFoundException;
 import systementor.pensionatapp.pensionat.room.model.Room;
 import systementor.pensionatapp.pensionat.room.repository.RoomRepository;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.logging.Logger;
 
 import static systementor.pensionatapp.pensionat.room.utils.Validations.validateDateRange;
 
@@ -23,6 +26,7 @@ import static systementor.pensionatapp.pensionat.room.utils.Validations.validate
 public class BookingService {
 
 
+    Logger logger = Logger.getLogger(BookingService.class.getName());
 
 
     private final BookingRepository bookingRepository;
@@ -44,6 +48,19 @@ public class BookingService {
 
     @Transactional
     public Booking createBooking(CreateBookingRequest request) {
+
+        System.out.println("Booking " + request.customerId() + " Tiden den kom in är "+ Instant.now());
+        System.out.println("Booking " + request.roomId());
+        System.out.println("Booking " + request.startDate());
+        System.out.println("Booking " + request.endDate());
+
+
+        logger.info("booking " + request.customerId());
+        logger.warning("booking " + request.customerId());
+
+        logger.config("booking " + request.customerId());
+
+        logger.severe("booking could not be created" );
 
         Customer customer = customerRepository.findById(request.customerId())
                 .orElseThrow(() -> new NotFoundException("Kunden finns inte"));
